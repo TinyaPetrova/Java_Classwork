@@ -1,4 +1,4 @@
-package lesson57;
+package lesson57.homework_tests;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,6 +1,6 @@
-package lesson57;
+package lesson57.homework_tests;
 
-import static lesson57.Task1.readDictionary;
+import static lesson57.homework_tests.Task1.readDictionary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
