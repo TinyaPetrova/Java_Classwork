@@ -3,6 +3,7 @@ package lesson57;
 import static lesson57.Task1.readDictionary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
@@ -89,9 +90,63 @@ public class Task1Tests {
     assertEquals(definition2, dictionary.get(word2));
   }
 
-  // TODO количество меньше строк
+  @Test
+  public void readNotAllFile() {
+    // arrange - задать начальные значения
+    String word1 = "word1";
+    String definition1 = "definition1";
+    String word2 = "word2";
+    String definition2 = "definition2";
+    String separator = ": ";
 
-  // TODO количество больше строк (будет ошибка)
+    // это как бы наш файл:
+    // 1
+    // word1: definition1
+    // word2: definition2
+
+    String stringBuilder = "1\n"
+        + word1 + separator + definition1 + '\n'
+        + word2 + separator + definition2 + '\n';
+    Scanner scanner = new Scanner(stringBuilder);
+    // act - совершить действие
+    Map<String, String> dictionary = readDictionary(scanner);
+
+    // assert - предположить, что результат правильный
+    assertFalse(dictionary.isEmpty()); // избыточная проверка
+    assertEquals(1, dictionary.size());
+    assertTrue(dictionary.containsKey(word1)); // избыточная проверка
+    assertEquals(definition1, dictionary.get(word1));
+    assertFalse(dictionary.containsKey(word2));
+    assertNull(dictionary.get(word2)); // избыточная проверка
+  }
+
+  @Test
+  public void readSeveralDefinitions() {
+    // arrange - задать начальные значения
+    String word1 = "word1";
+    String definition1 = "definition1";
+    String definition2 = "definition2";
+    String separator = ": ";
+
+    // это как бы наш файл:
+    // 2
+    // word1: definition1
+    // word2: definition2
+
+    String stringBuilder = "2\n"
+        + word1 + separator + definition1 + '\n'
+        + word1 + separator + definition2 + '\n';
+    Scanner scanner = new Scanner(stringBuilder);
+    // act - совершить действие
+    Map<String, String> dictionary = readDictionary(scanner);
+
+    // assert - предположить, что результат правильный
+    assertFalse(dictionary.isEmpty()); // избыточная проверка
+    assertEquals(1, dictionary.size());
+    assertTrue(dictionary.containsKey(word1)); // избыточная проверкаЫ
+    assertFalse(dictionary.containsValue(definition1)); // первое определение затёрто
+    assertEquals(definition2, dictionary.get(word1)); // word1 соответствует второе определение
+  }
 
   @Test
   public void readFileAfterEnd() {
