@@ -1,6 +1,6 @@
-package lesson56;
+package lesson57;
 
-import static lesson56.Task1.readDictionary;
+import static lesson57.Task1.readDictionary;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +31,32 @@ public class Task1Tests {
 //      assertTrue(dictionary.isEmpty());
   }
 
-  // TODO тест на отрицательное число определений
+  @Test
+  public void readNegativeAmount() {
+    // arrange - задать начальные значения
+    String word1 = "word1";
+    String definition1 = "definition1";
+    String separator = ": ";
+
+    // это как бы наш файл:
+    // 1
+    // word1: definition1
+    String input = "-1\n"
+        + word1 + separator + definition1 + '\n';
+    Scanner scanner = new Scanner(input);
+
+    // act - совершить действие
+    // for (int i = 0; i < n; ++i)
+    // 'i < -1' неверно с самого начала - мы даже не попадём в цикл
+    Map<String, String> dictionary = readDictionary(scanner);
+
+    // assert - предположить, что результат правильный
+    assertFalse(dictionary.isEmpty());
+    // избыточные проверки
+    assertEquals(0, dictionary.size());
+    assertTrue(dictionary.containsKey(word1));
+    assertEquals(definition1, dictionary.get(word1));
+  }
 
   @Test
   public void readCommonDictionary() {
