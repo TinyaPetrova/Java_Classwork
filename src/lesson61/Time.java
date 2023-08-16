@@ -1,6 +1,6 @@
 package lesson61;
 
-import java.util.HashMap;
+import java.time.Duration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -43,7 +43,36 @@ public class Time {
   private static void printTimeEfficiency(Map<String, Double> efficiency) {
     System.out.println("Эффективность по времени: ");
     for (Map.Entry<String, Double> entry : efficiency.entrySet()) {
-      System.out.printf("O(%s) = %f%n", entry.getKey(), entry.getValue());
+      Double efficiencyValue = entry.getValue();
+      if (efficiencyValue.longValue() == Long.MAX_VALUE) {
+        System.out.println("O(" + entry.getKey() + ") = Infinity");
+        continue;
+      }
+      Duration result = Duration.ofNanos(efficiencyValue.longValue());
+      long days = result.toDays();
+      int hours = result.toHoursPart();
+      int minutes = result.toMinutesPart();
+      int seconds = result.toSecondsPart();
+      int nanos = result.toNanosPart();
+      StringBuilder toPrint = new StringBuilder();
+      toPrint.append("O(").append(entry.getKey()).append((") ="));
+      if (days > 0) {
+        toPrint.append(" ").append(days).append("d");
+      }
+      if (hours > 0) {
+        toPrint.append(" ").append(hours).append("h");
+      }
+      if (minutes > 0) {
+        toPrint.append(" ").append(minutes).append("min");
+      }
+      if (seconds > 0) {
+        toPrint.append(" ").append(seconds).append("sec");
+      }
+      if (result.toMinutes() == 0) {
+        toPrint.append(" ").append(nanos).append("h");
+      }
+      System.out.println("O(" + entry.getKey() + ") = " + result);
+      // System.out.printf("O(%s) = %f%n", entry.getKey(), entry.getValue());
     }
   }
 
