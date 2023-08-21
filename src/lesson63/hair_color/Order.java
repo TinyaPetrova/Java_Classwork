@@ -1,6 +1,7 @@
 package lesson63.hair_color;
 
 import java.time.LocalTime;
+import java.util.Scanner;
 
 public class Order {
 
@@ -61,5 +62,19 @@ public class Order {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public static Order interactiveRead(Scanner scanner) {
+    System.out.print("Введите имя заказчика: ");
+    String name = scanner.nextLine();
+    System.out.print("Введите время начала: ");
+    LocalTime startTime = LocalTime.parse(scanner.nextLine());
+    System.out.print("Укажите планируемое количество цветов: ");
+    int colors = scanner.nextInt();
+    scanner.nextLine(); // пропускаем весь ввод после числа до нажатия enter (для себя)
+    System.out.print("Укажите длину волос в см: ");
+    double length = scanner.nextDouble();
+    scanner.nextLine(); // тут ОБЯЗАТЕЛЬНО дочитываем последнюю строку до конца
+    return new Order(name, startTime, colors, length);
   }
 }
