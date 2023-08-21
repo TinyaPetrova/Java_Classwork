@@ -25,8 +25,8 @@ public class Order {
   public Order(String name, LocalTime startTime, int colors, double length) {
     this.name = name;
     this.startTime = startTime;
-    this.colors = colors;
-    this.length = length;
+    this.colors = checkColors(colors);
+    this.length = checkLength(length);
     calculatePrice();
   }
 
@@ -58,13 +58,45 @@ public class Order {
     this.startTime = startTime;
   }
 
+  /**
+   * Проверка цветов на корректность
+   *
+   * @param colors цвета для проверки
+   * @return корректные цвета
+   */
+  private int checkColors(int colors) {
+    if (length < 0) {
+      throw new IllegalArgumentException("Количество цветов не может быть отрицательным");
+    }
+    return colors;
+  }
+
   public void setColors(int colors) {
+    if (colors < 0) {
+      throw new IllegalArgumentException("Количество цветов не может быть отрицательным");
+    }
     this.colors = colors;
+    calculatePrice();
+  }
+
+  /**
+   * Проверка длины на корректность
+   *
+   * @param length исходная длина
+   * @return корректная длина
+   */
+  private double checkLength(double length) {
+    if (length < 0) {
+      throw new IllegalArgumentException("Длина не может быть отрицательной");
+    }
+    return length;
   }
 
   public void setLength(double length) {
     this.length = length;
+    calculatePrice();
   }
+
 
   public void setPrice(double price) {
     this.price = price;
