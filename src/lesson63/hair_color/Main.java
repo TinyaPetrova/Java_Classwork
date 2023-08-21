@@ -76,9 +76,4 @@ public class Main {
       System.out.println((i + 1) + ". " + orders.get(i));
     }
   }
-
-  @Override
-  public String toString() {
-    return "{}";
-  }
 }
