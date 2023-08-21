@@ -1,6 +1,7 @@
 package lesson63.hair_color;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Order {
@@ -120,13 +121,32 @@ public class Order {
     System.out.print("Введите имя заказчика: ");
     String name = scanner.nextLine();
     System.out.print("Введите время начала: ");
-    LocalTime startTime = LocalTime.parse(scanner.nextLine());
+    LocalTime startTime = LocalTime.now();
+    boolean startTimeRead = false;
+    while (!startTimeRead) {
+      String startTimeInput = scanner.nextLine();
+      try {
+        startTime = LocalTime.parse(startTimeInput);
+        startTimeRead = true;
+      } catch (DateTimeParseException e) {
+        System.out.print("Некорректный ввод: " + startTimeInput);
+        System.out.print("Введите время в формате HH:MM: ");
+      }
+    }
     System.out.print("Укажите планируемое количество цветов: ");
+    while (!scanner.hasNextInt()) {
+      System.out.print("Некорректный ввод: " + scanner.nextLine());
+      System.out.print("Введите целое число: ");
+    }
     int colors = scanner.nextInt();
-    scanner.nextLine(); // пропускаем весь ввод после числа до нажатия enter (для себя)
-    System.out.print("Укажите длину волос в см: ");
+    scanner.nextLine(); // пропускаем весь ввод после числа до нажатия клавиши Enter
+    System.out.print("Укажите длину волос в сантиметрах: ");
+    while (!scanner.hasNextDouble()) {
+      System.out.println("Некорректный ввод: " + scanner.nextLine());
+      System.out.print("Введите число: ");
+    }
     double length = scanner.nextDouble();
-    scanner.nextLine(); // тут ОБЯЗАТЕЛЬНО дочитываем последнюю строку до конца
+    scanner.nextLine(); // дочитываем ОБЯЗАТЕЛЬНО последнюю строку до конца
     return new Order(name, startTime, colors, length);
   }
 }
