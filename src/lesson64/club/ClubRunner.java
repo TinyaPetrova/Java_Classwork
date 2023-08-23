@@ -21,8 +21,7 @@ public class ClubRunner {
 
     club.greet; // начало работы, "добро пожаловать"
 
-    boolean choice = hasNextVisitors(scanner); // выбор команды (есть посетители или нет)
-    while (!choice.equals(EXIT)) {
+    while (hasNextVisitors(scanner)) {
       if (!club.hasFreeSpace()) { // если нет мест, то заканчиваем цикл
         club.sorry();
         break;
