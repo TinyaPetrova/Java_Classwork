@@ -19,7 +19,7 @@ public class Club {
    * Вывод сообщения о начале работы клуба
    */
   public void greet() {
-    System.out.println("Добро пожаловать в клуб " + title);
+    System.out.println("Добро пожаловать в клуб \"" + title + "\"");
   }
 
   /**
@@ -61,6 +61,6 @@ public class Club {
    * Сообщение о закрытии клуба
    */
   public void close() {
-    System.out.println("Клуб " + title + " закрывает свои двери до следующего раза");
+    System.out.println("Клуб \"" + title + "\" закрывает свои двери до следующего раза");
   }
 }
