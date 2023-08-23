@@ -7,12 +7,14 @@ public class Club {
 
   private final String title;
   private final int capacity;
+  private final int allowedAge;
   private final List<Visitor> visitors = new ArrayList<>();
 
 
-  public Club(String title, int capacity) {
+  public Club(String title, int capacity, int allowedAge) {
     this.title = title;
     this.capacity = capacity;
+    this.allowedAge = allowedAge;
   }
 
   /**
@@ -44,6 +46,10 @@ public class Club {
    * @param visitor потенциальный посетитель
    */
   public void tryToEnter(Visitor visitor) {
+    if (visitor.getAge() < allowedAge) {
+      System.out.println("Извините, вам нельзя в клуб");
+      return;
+    }
     visitors.add(visitor);
   }
 
@@ -52,6 +58,8 @@ public class Club {
    */
   public void printVisitorsByAge() {
     System.out.println("В клуб \"" + title + "\" сейчас " + visitors.size() + " посетителей: ");
+    List<Visitor> visitorsList = new ArrayList<>(visitors);
+    visitorsList.sort((o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
     for (Visitor v : visitors) {
       System.out.println(v);
     }
