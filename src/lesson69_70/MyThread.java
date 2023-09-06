@@ -1,4 +1,4 @@
-package lesson69;
+package lesson69_70;
 
 public class MyThread extends Thread {
 
