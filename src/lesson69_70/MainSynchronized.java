@@ -5,7 +5,7 @@ public class MainSynchronized extends Thread {
   static int counter = 0;
 
   // служебное слово "synchronized" запрещает запускать метод или блок кода
-  // в разных потоках одновременно - если овый поток подойдёт к этому месту,
+  // в разных потоках одновременно - если новый поток подойдёт к этому месту,
   // он будет дожидаться предыдущего вызова
 
   synchronized public static void increaseCounter() {
